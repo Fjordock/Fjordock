@@ -1,0 +1,22 @@
+# Visual Studio Code
+.vscode/
+.editorconfig
+.gitattributes
+.npmrc
+.nvmrc
+eslint.config.ts
+stylelint.config.ts
+package.json
+pnpm*.yaml
+
+# Build results
+src/**/[Dd]ebug/
+src/**/[Rr]elease/
+src/**/[Bb]in/
+src/**/[Oo]bj/
+src/Templater/
+    
+# **/publish
+**/node_modules/
+packages/**/dist
+test/README.md
