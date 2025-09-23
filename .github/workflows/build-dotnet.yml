@@ -1,4 +1,4 @@
-name: Build Fjordock Alpine Image
+name: Build Fjordock .NET Image
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ permissions:
   packages: write
 
 jobs:
-  fjordock-alpine-image:
+  fjordock-dotnet-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -34,15 +34,15 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push multiarch Alpine image
+      - name: Build and push multiarch .NET image
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: docker/alpine/Dockerfile
+          file: docker/dotnet/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: ${{ env.ACT != 'true' }}
           tags: |
-            ghcr.io/${{ steps.string.outputs.lowercase }}/alpine:latest
-            ghcr.io/${{ steps.string.outputs.lowercase }}/alpine:3.22.1
+            ghcr.io/${{ steps.string.outputs.lowercase }}/dotnet:latest
+            ghcr.io/${{ steps.string.outputs.lowercase }}/dotnet:3.22.1
           provenance: false
           sbom: false

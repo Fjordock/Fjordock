@@ -10,7 +10,7 @@ ENV TZ=Etc/UTC LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN apk update && \
     apk upgrade && \
-    apk add --no-cache ca-certificates tzdata icu-libs icu-data-full && \
+    apk add --no-cache ca-certificates ca-certificates-bundle tzdata icu-libs icu-data-full libgcc libssl3 libstdc++ zlib && \
     addgroup -Sg 1000 fjordock && \
     adduser -Sg 1000 -G fjordock -h /app -g "fjordock" -s /bin/sh fjordock
 
