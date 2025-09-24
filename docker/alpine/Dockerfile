@@ -8,11 +8,14 @@ ADD ./docker/alpine/alpine-minirootfs-3.22.1-${TARGETARCH}${TARGETVARIANT:+-$TAR
 
 ENV TZ=Etc/UTC LANG=C.UTF-8 LC_ALL=C.UTF-8
 
+ARG FJORDOCK_UID=1000
+ARG FJORDOCK_GID=1000
+
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache ca-certificates ca-certificates-bundle tzdata icu-libs icu-data-full libgcc libssl3 libstdc++ zlib && \
-    addgroup -Sg 1000 fjordock && \
-    adduser -Sg 1000 -G fjordock -h /app -g "fjordock" -s /bin/sh fjordock
+    addgroup -Sg ${FJORDOCK_GID} fjordock && \
+    adduser -Su ${FJORDOCK_UID} -G fjordock -h /app -g "fjordock" -s /bin/sh fjordock
 
 # Copy the appropriate templater binary
 COPY ./docker/alpine/linux/${TARGETARCH}${TARGETVARIANT:+/$TARGETVARIANT}/templater /usr/local/bin/templater
